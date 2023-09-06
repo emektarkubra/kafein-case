@@ -1,9 +1,10 @@
 import { useContext } from "react"
 import { SiteContext } from "../context/SiteContext"
 import logo from "../assests/logo.svg"
+import { useState } from "react"
 
 export default function Login() {
-    const { handleUserLogin, setOnlineUser } = useContext(SiteContext)
+    const { setOnlineUser, defaultUser, onlineUser, navigate, setIsValid, noteList } = useContext(SiteContext)
 
     function handleChangeUserLoginInput(e) {
         setOnlineUser(prev => {
@@ -12,6 +13,18 @@ export default function Login() {
                 [e.target.name]: e.target.value
             }
         })
+    }
+
+    function handleUserLogin(e) {
+        e.preventDefault()
+        if (defaultUser.username === onlineUser.username && defaultUser.password === onlineUser.password) {
+            setIsValid(true)
+            defaultUser.notes = noteList ?? []
+            localStorage.setItem("onlineUser", JSON.stringify(defaultUser));
+
+            navigate("/mylist")
+        }
+
     }
 
     return (

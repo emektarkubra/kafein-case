@@ -6,17 +6,17 @@ import logo from "../assests/logo.svg"
 import { SiteContext } from "../context/SiteContext";
 
 export default function Header() {
-    const { isUserValid, setIsUserValid } = useContext(SiteContext)
+    const { isValid, setIsValid } = useContext(SiteContext)
     const [storedOnlineUser, setStoredOnlineUser] = useState(null)
 
     useEffect(() => {
         const localStorageOnlineUser = JSON.parse(localStorage.getItem("onlineUser"))
         setStoredOnlineUser(localStorageOnlineUser)
-    }, [isUserValid])
+    }, [isValid])
 
     function handleSignOut(e) {
-        localStorage.setItem("onlineUser", JSON.stringify({}))
-        setIsUserValid(false)
+        setIsValid(false)
+        localStorage.removeItem("onlineUser")
 
     }
 
