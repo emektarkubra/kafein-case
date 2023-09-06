@@ -1,0 +1,64 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #eee9e9;
+$primary-bg-color :#212529;
+$primary-border-color : #495057;
+
+
+.modal-box {
+  font-family: $font-stack;
+  font-size: 15px;
+  border: 1px solid $primary-border-color;
+  width: 30vw;
+  padding: 1rem;
+  background-color: $primary-bg-color;
+  z-index: 1;
+  position: fixed;
+  color: $primary-color;
+  border-radius: 10px;
+}
+
+.body {
+  padding: 20px;
+}
+
+
+.close-modal {
+  background-color: $primary-bg-color;
+  border: none;
+  font-size: 20px;
+  color: $primary-border-color;
+  &:hover {
+    color : $primary-color;
+  }
+}
+
+.header {
+  color: #495057;
+  float: right;
+  display: block;
+}
+
+.footer {
+  display: flex;
+  justify-content: end;
+  padding: 15px;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: $primary-color;
+  border: 1px solid #dc3545;
+  border-radius: 4.5px;
+  margin-left: 5px;
+  outline : none;
+}
+
+.close-btn {
+  background-color: #6c757d;
+  color: $primary-color;
+  border: 1px solid #6c757d;
+  border-radius: 4.5px;
+  margin-left: 5px;
+  outline : none;
+
+}
