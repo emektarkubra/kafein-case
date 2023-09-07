@@ -41,7 +41,7 @@ export default function Login() {
                     <img src={logo} className="img-fluid" alt="..." />
                 </div>
                 {
-                    showAlert ? <Alert alert="danger" content="Yanlış şifre" /> : ""
+                    showAlert ? <Alert alert="danger" content="User name or password is not valid!" /> : ""
                 }
 
                 <form onSubmit={handleUserLogin}>

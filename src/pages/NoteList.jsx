@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react"
+import Alert from "../components/Alert"
 import Modal from "../components/Modal"
 import NoteCard from "../components/NoteCard"
 import { SiteContext } from "../context/SiteContext"
 
 export default function NoteList() {
-    const { noteList, openModal, setNoteList } = useContext(SiteContext)
+    const { noteList, openModal, setNoteList, showDangerAlert } = useContext(SiteContext)
 
     const [count, setCount] = useState(10)
     const [displayedNotes, setDisplayedNotes] = useState([])
@@ -45,7 +46,11 @@ export default function NoteList() {
             {
                 openModal && <Modal />
             }
+
             <div className="col-7" >
+                {
+                    showDangerAlert ? <Alert alert="danger" content="Deleted note" /> : ""
+                }
                 <div className="form-group mb-3">
                     <input onChange={handleFilterNotes} type="text" id="disabledTextInput" className="form-control" placeholder="Filter your note" />
                 </div>

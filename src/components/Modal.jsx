@@ -5,7 +5,7 @@ import './style/modal.scss';
 
 export default function Modal() {
 
-    const { isDelete, setIsDelete, setOpenModal, noteList, userId, setNoteList } = useContext(SiteContext)
+    const { isDelete, setIsDelete, setOpenModal, noteList, userId, setNoteList, setShowDangerAlert } = useContext(SiteContext)
 
     function handleDelete() {
         setOpenModal(false)
@@ -17,11 +17,16 @@ export default function Modal() {
             localStorage.setItem("onlineUser", JSON.stringify(storedUser))
         }
         setIsDelete(false)
+        setShowDangerAlert(true)
+        setTimeout(() => {
+            setShowDangerAlert(false)
+        }, 1000);
     }
 
     function handleClose() {
         setIsDelete(false)
         setOpenModal(false)
+        setShowDangerAlert(false)
     }
 
     return (

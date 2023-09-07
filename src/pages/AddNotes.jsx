@@ -94,10 +94,10 @@ export default function AddNotes() {
             <div className="col-5" >
 
                 {
-                    showAlert ? <Alert alert="success" content="Added note" /> : ""
+                    showAlert ? <Alert alert="success" content="Added note succesfully" /> : ""
                 }
                 {
-                    imgSize ? <Alert alert="danger" content="Couldn't added.. image size too big" /> : ""
+                    imgSize ? <Alert alert="danger" content="Your image size is too big" /> : ""
                 }
 
                 <form onSubmit={handleSubmit}>
