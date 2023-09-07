@@ -2,21 +2,17 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
+import Alert from "../components/Alert";
 import { SiteContext } from "../context/SiteContext";
 
 
 export default function AddNotes() {
-    const { noteList, setNoteList } = useContext(SiteContext)
-
-    let defaultNote = {
-        id: "",
-        content: "",
-        priority: "",
-        image: ""
-    }
-
-    const [note, setNote] = useState(defaultNote)
+    const { noteList, setNoteList, showAlert, setShowAlert, note, setNote, defaultNote, imgSize, setImgSize } = useContext(SiteContext)
     const [imageUrl, setImageUrl] = useState("")
+
+    useEffect(() => {
+        setShowAlert(false)
+    }, [])
 
     useEffect(() => {
         setNote(prev => {
@@ -44,10 +40,9 @@ export default function AddNotes() {
         })
     }
 
-    function read(e) {
+    function handleImageRead(e) {
         if (e.target.files[0].size >= 3000) {
-            console.log("çok büyük")
-            setImageUrl("")
+            setImageUrl()
         } else {
             setImageUrl(URL.createObjectURL(e.target.files[0]));
             setNote(prev => {
@@ -61,11 +56,27 @@ export default function AddNotes() {
 
 
     function handleSubmit(e) {
-        setNoteList(prev => {
-            const updatedNoteList = [note, ...prev]
-            return updatedNoteList ?? []
-        })
+        if (note.image === undefined) {
 
+            // for alert
+            setImgSize(true)
+            setTimeout(() => {
+                setImgSize(false)
+            }, 1000);
+
+        } else {
+            setNoteList(prev => {
+                const updatedNoteList = [note, ...prev]
+                return updatedNoteList ?? []
+            })
+
+            // for success alert
+            setShowAlert(true)
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 1000);
+
+        }
         e.target.reset()
         e.preventDefault()
     }
@@ -73,24 +84,32 @@ export default function AddNotes() {
     return (
         <>
             <div className="col-5" >
+
+                {
+                    showAlert ? <Alert alert="success" content="Added note" /> : ""
+                }
+                {
+                    imgSize ? <Alert alert="danger" content="Couldn't added.. image size too big" /> : ""
+                }
+
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group mb-3">
+                    <div className="form-group mb-4">
                         <label htmlFor="disabledTextInput" className="form-label">Note</label>
                         <input onChange={handleChangeNoteInput} name="content" type="text" id="disabledTextInput" className="form-control" placeholder="Add your note" required />
                     </div>
-                    <div className="form-group mb-3">
+                    <div className="form-group mb-4">
                         <label htmlFor="disabledTextInput" className="form-label">Select priority (1-5)</label>
                         <input onChange={handleChangeNoteInput} name="priority" type="number" id="disabledTextInput" className="form-control" placeholder="Select priority" min="1" max="5" required />
                     </div>
-                    <div className="form-group mb-3">
+                    <div className="form-group mb-4">
                         <label className="d-block" htmlFor="exampleFormControlFile">Select Image</label>
-                        <input onChange={read} name="image" type="file" className="form-control-file" id="exampleFormControlFile" accept="image/png, image/jpeg" />
+                        <input onChange={handleImageRead} name="image" type="file" className="form-control-file" id="exampleFormControlFile" accept="image/png, image/jpeg" />
                     </div>
-                    <div className="form-group mb-3">
+                    <div className="form-group mb-4">
                         <button type="submit" className="btn btn-primary">Add note</button>
                     </div>
                 </form>
-                <img src={imageUrl} alt="" />
+
             </div>
         </>
     )

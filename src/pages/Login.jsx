@@ -2,9 +2,10 @@ import { useContext } from "react"
 import { SiteContext } from "../context/SiteContext"
 import logo from "../assests/logo.svg"
 import { useState } from "react"
+import Alert from "../components/Alert"
 
 export default function Login() {
-    const { setOnlineUser, defaultUser, onlineUser, navigate, setIsValid, noteList } = useContext(SiteContext)
+    const { setOnlineUser, defaultUser, onlineUser, navigate, setIsValid, noteList, isValid, showAlert, setShowAlert } = useContext(SiteContext)
 
     function handleChangeUserLoginInput(e) {
         setOnlineUser(prev => {
@@ -18,11 +19,17 @@ export default function Login() {
     function handleUserLogin(e) {
         e.preventDefault()
         if (defaultUser.username === onlineUser.username && defaultUser.password === onlineUser.password) {
+            setShowAlert(true)
             setIsValid(true)
             defaultUser.notes = noteList ?? []
             localStorage.setItem("onlineUser", JSON.stringify(defaultUser));
 
             navigate("/mylist")
+        } else {
+            setShowAlert(true)
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 1000);
         }
 
     }
@@ -34,6 +41,9 @@ export default function Login() {
                     <img src={logo} className="img-fluid" alt="..." />
                     <p className="h4 fw-bold">Welcome to Note-Book</p>
                 </div>
+                {
+                    showAlert ? <Alert alert="danger" content="Yanlış şifre" /> : ""
+                }
 
                 <form onSubmit={handleUserLogin}>
                     <div className="mb-3">
