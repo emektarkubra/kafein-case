@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../assests/logo.svg";
+import lightLogo from "../assests/logo-light.svg";
 import { SiteContext } from "../context/SiteContext";
 import "./style/header.scss"
 
@@ -35,9 +35,9 @@ export default function Header() {
                             {
                                 storedOnlineUser?.id ? (<>
                                     <NavLink to="/mylist" className="d-flex flex-wrap align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                                        <img className="logo-img" src={logo} alt="image not found" />
+                                        <img className="logo-img" src={lightLogo} alt="image not found" />
                                     </NavLink>
-                                </>) : <img className="logo-img" src={logo} alt="image not found" />
+                                </>) : <img className="logo-img" src={lightLogo} alt="image not found" />
                             }
                         </div>
                         <div className="text-end">

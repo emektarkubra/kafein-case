@@ -16,7 +16,8 @@ export default function NoteList() {
 
     function handleFilterNotes(e) {
         const storedOnlineUser = JSON.parse(localStorage.getItem("onlineUser"))
-        const filteredNoteList = storedOnlineUser.notes.filter(note => note.content.includes(e.target.value))
+
+        const filteredNoteList = storedOnlineUser.notes.filter(note => (note.content).toUpperCase().includes(e.target.value.toUpperCase()))
         setNoteList(filteredNoteList)
         setCount(10)
     }

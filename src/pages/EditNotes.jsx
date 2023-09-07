@@ -4,7 +4,7 @@ import Alert from "../components/Alert"
 import { SiteContext } from "../context/SiteContext"
 
 export default function EditNotes() {
-    const { showAlert, setShowAlert, editedNote, setEditedNote, setImageUrl, imageUrl, noteList, navigate, note, imgSize, setImgSize } = useContext(SiteContext)
+    const { showAlert, setShowAlert, editedNote, setEditedNote, setImageUrl, imageUrl, noteList, imgSize, setImgSize } = useContext(SiteContext)
 
     useEffect(() => {
         setEditedNote(prev => {
@@ -33,7 +33,7 @@ export default function EditNotes() {
     });
 
     async function handleImageRead(e) {
-        if (e.target.files[0].size >= 3000) {
+        if (e.target.files[0].size >= 800000) {
             setImageUrl()
 
         } else {

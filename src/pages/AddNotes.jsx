@@ -7,7 +7,7 @@ import { SiteContext } from "../context/SiteContext";
 
 
 export default function AddNotes() {
-    const { noteList, setNoteList, showAlert, setShowAlert, note, setNote, defaultNote, imgSize, setImgSize } = useContext(SiteContext)
+    const { noteList, setNoteList, showAlert, setShowAlert, note, setNote, imgSize, setImgSize } = useContext(SiteContext)
     const [imageUrl, setImageUrl] = useState("")
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export default function AddNotes() {
     });
 
     async function handleImageRead(e) {
-        if (e.target.files[0].size >= 3000) {
+        if (e.target.files[0].size >= 800000) {
             setImageUrl()
         } else {
             const base64File = await toBase64(e.target.files[0])

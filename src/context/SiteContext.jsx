@@ -32,15 +32,13 @@ export default function SiteContextProvider({ children }) {
     const [editedNote, setEditedNote] = useState({})
     const [imageUrl, setImageUrl] = useState("")
     const [showAlert, setShowAlert] = useState(false)
-    const [imgSize, setImgSize] = useState(false)  // image boyutunu kontrol etmek
-
-    const [notesNumber, setNotesNumber] = useState(0)
+    const [imgSize, setImgSize] = useState(false)
 
 
     useEffect(() => {
 
         const storedOnlineUser = JSON.parse(localStorage.getItem("onlineUser"))
-        const storedNoteList = JSON.parse(localStorage.getItem("noteList"))
+        const storedNoteList = JSON.parse(localStorage.getItem("noteList")) ?? []
         if (storedOnlineUser?.id) {
             navigate("/mylist")
             setIsValid(true)
@@ -50,7 +48,6 @@ export default function SiteContextProvider({ children }) {
         setNoteList(storedOnlineUser?.notes ?? storedNoteList)
         setImgSize(false)
         setShowAlert(false)
-        setNotesNumber(storedOnlineUser?.notes.length)
     }, [])
 
 
