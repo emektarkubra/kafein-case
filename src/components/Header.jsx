@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assests/logo.svg"
 import { SiteContext } from "../context/SiteContext";
 
@@ -36,7 +36,6 @@ export default function Header() {
                             {
                                 storedOnlineUser?.id && (<>
                                     <li><NavLink className="nav-link px-2 text-white" to="/mylist">MyList</NavLink></li>
-                                    <li><NavLink className="nav-link px-2 text-white" to="/editnotes">EditNotes</NavLink></li>
                                 </>)
                             }
                         </ul>

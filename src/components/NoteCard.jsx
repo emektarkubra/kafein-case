@@ -1,10 +1,12 @@
-import { useEffect } from "react"
-import { useState } from "react"
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import { SiteContext } from "../context/SiteContext"
+import LazyLoadImage from "./LazyLoadImage"
+import "./style/noteCard.scss"
 
 export default function NoteCard({ item }) {
-    const { setOpenModal, setIsDelete, setUserId } = useContext(SiteContext)
+    const { setOpenModal, setIsDelete, setUserId, setEditedNote } = useContext(SiteContext)
+
 
     function handleRemoveNote(id) {
         setOpenModal(true)
@@ -12,21 +14,28 @@ export default function NoteCard({ item }) {
         setIsDelete(true)
     }
 
-    return (
-        <div className="card mb-5">
-            <div className="card-header">
-                Featured
-            </div>
-            <div className="card-body " style={{ width: "50em" }}>
-                <div className="img">
-                    <img style={{ width: "30px", height: "30px" }} src={item.image} alt="" />
-                </div>
-                <div>
-                    <h5 className="card-title">{item.content}</h5>
-                    <p className="card-text">{item.priority}</p>
-                    <button type="button" className="btn btn-primary btn-sm">Edit</button>
-                    <button onClick={() => handleRemoveNote(item.id)} type="button" className="btn btn-danger btn-sm">Remove</button>
+    function handleEditTask(id) {
+        const storedOnlineUser = JSON.parse(localStorage.getItem("onlineUser"))
+        const editedNote = storedOnlineUser.notes.find(item => item.id === id)
+        setEditedNote(editedNote)
+    }
 
+    return (
+        <div className="card">
+            <div className="card-header">
+                {item.priority}
+            </div>
+            <div className="card-body">
+                <div className="img-box">
+                    {/* <img style={{ width: "30px", height: "30px" }} src={item.image} alt="" /> */}
+                    <LazyLoadImage src={item.image} alt="" />
+                </div>
+                <div className="card-content">
+                    {item.content}
+                </div>
+                <div className="button-group">
+                    <Link to="/editnotes"><button onClick={() => handleEditTask(item.id)} type="button" className="btn btn-primary edit-btn">Edit</button></Link>
+                    <button onClick={() => handleRemoveNote(item.id)} type="button" className="btn btn-danger remove-btn">Remove</button>
                 </div>
             </div>
 
