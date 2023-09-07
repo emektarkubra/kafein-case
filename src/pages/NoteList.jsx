@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import Modal from "../components/Modal"
 import NoteCard from "../components/NoteCard"
 import { SiteContext } from "../context/SiteContext"
@@ -6,10 +6,19 @@ import { SiteContext } from "../context/SiteContext"
 export default function NoteList() {
     const { noteList, openModal, setNoteList } = useContext(SiteContext)
 
+    const [count, setCount] = useState(10)
+    const [displayedNotes, setDisplayedNotes] = useState([])
+
+    useEffect(() => {
+        const slicedNoteList = noteList.slice(0, count)
+        setDisplayedNotes(slicedNoteList)
+    }, [noteList, count])
+
     function handleFilterNotes(e) {
         const storedOnlineUser = JSON.parse(localStorage.getItem("onlineUser"))
         const filteredNoteList = storedOnlineUser.notes.filter(note => note.content.includes(e.target.value))
         setNoteList(filteredNoteList)
+        setCount(10)
     }
 
     function handleSortNotes(e) {
@@ -17,10 +26,17 @@ export default function NoteList() {
         if (e.target.value === "1") {
             storedOnlineUser.notes.sort((a, b) => a.priority - b.priority)
             setNoteList(storedOnlineUser.notes)
-        } else if (e.target.value === "2") {
+        } else if (e.target.value === "10") {
             storedOnlineUser.notes.sort((a, b) => b.priority - a.priority)
             setNoteList(storedOnlineUser.notes)
+        } else {
+            setNoteList(storedOnlineUser.notes)
         }
+        setCount(10)
+    }
+
+    function handleShowMore() {
+        setCount(prev => prev + 10)
     }
 
     return (
@@ -41,8 +57,11 @@ export default function NoteList() {
                 </div>
 
                 {
-                    noteList?.map(item => <NoteCard key={item.id} item={item} />)
+                    displayedNotes?.map(item => <NoteCard key={item.id} item={item} />)
                 }
+                <div className="form-group mb-3">
+                    <button onClick={handleShowMore} className="btn btn-primary">Show more</button>
+                </div>
             </div>
         </>
     )
