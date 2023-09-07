@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <div className="mt-5" data-bs-theme="dark">
+        <div className="mt-5">
             <div className="container">
                 <footer className="py-5">
                     <div className="row">

@@ -14,14 +14,6 @@ export default function SiteContextProvider({ children }) {
         notes: []
     }
 
-    // const priorityInfo = {
-    //     "1": { color: "red", text: "crucial" },
-    //     "2": { color: "orange", text: "a little important" },
-    //     "3": { color: "blue", text: "medium" },
-    //     "4": { color: "green", text: "less important" },
-    //     "5": { color: "gray", text: "slight" },
-    // }
-
     let defaultNote = {
         id: "",
         content: "",
@@ -42,6 +34,8 @@ export default function SiteContextProvider({ children }) {
     const [showAlert, setShowAlert] = useState(false)
     const [imgSize, setImgSize] = useState(false)  // image boyutunu kontrol etmek
 
+    const [notesNumber, setNotesNumber] = useState(0)
+
 
     useEffect(() => {
 
@@ -56,6 +50,7 @@ export default function SiteContextProvider({ children }) {
         setNoteList(storedOnlineUser?.notes ?? storedNoteList)
         setImgSize(false)
         setShowAlert(false)
+        setNotesNumber(storedOnlineUser?.notes.length)
     }, [])
 
 

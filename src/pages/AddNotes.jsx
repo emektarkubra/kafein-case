@@ -40,11 +40,19 @@ export default function AddNotes() {
         })
     }
 
-    function handleImageRead(e) {
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+    });
+
+    async function handleImageRead(e) {
         if (e.target.files[0].size >= 3000) {
             setImageUrl()
         } else {
-            setImageUrl(URL.createObjectURL(e.target.files[0]));
+            const base64File = await toBase64(e.target.files[0])
+            setImageUrl(base64File);
             setNote(prev => {
                 return {
                     ...prev,

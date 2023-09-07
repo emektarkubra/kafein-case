@@ -2,53 +2,55 @@ $primary-color: #212529;
 $font-family: Helvetica, sans-serif;
 
 .card {
-    font-family: $font-family;
-    margin-bottom: 2vw;
+  font-family: $font-family;
+  margin-bottom: 2vw;
 
-    &:hover {
-        .button-group {
-            visibility: visible;
-        }
+  &:hover {
+    .button-group {
+      visibility: visible;
     }
+  }
 }
 
 .card-body {
-    overflow: hidden;
-    overflow-wrap: none;
-    display: flex;
-    justify-content: space-between;
+  overflow: hidden;
+  overflow-wrap: none;
+  display: flex;
+  justify-content: space-around;
 }
 
-
 .card-content {
-    color: $primary-color;
-    padding: 0 0 0 0.5vw;
-    width: 70%;
-    font-size: 1.2vw;
-    margin-top: 0.2vw;
+  color: $primary-color;
+  padding: 0 0 0 0.5vw;
+  width: 70%;
+  font-size: 1.2vw;
+  margin-top: 0.2vw;
 }
 
 .button-group {
-    display: flex;
-    flex-wrap: nowrap;
-    visibility: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+  visibility: hidden;
 }
 
 .remove-btn {
-    width: 70px;
-    min-width: 20px;
-    height: 30px;
-    margin-left: 0.3vw;
+  color: red;
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  width: 27px;
 }
 
 .edit-btn {
-    width: 50px;
-    min-width: 10px;
-    height: 30px;
-    margin-left: 0.3vw;
+  color: blue;
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  width: 27px;
+  height: 32px;
 }
 
 .star {
-    color: red;
-    float : right;
+  color: red;
+  float: right;
 }

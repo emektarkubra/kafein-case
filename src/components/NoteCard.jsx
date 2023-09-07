@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { SiteContext } from "../context/SiteContext"
 import LazyLoadImage from "./LazyLoadImage"
 import "./style/noteCard.scss"
-import { BsFillStarFill } from "react-icons/bs";
+import { BsFillStarFill, BsPencilSquare, BsFillTrashFill } from "react-icons/bs";
 
 
 export default function NoteCard({ item }) {
@@ -38,11 +38,10 @@ export default function NoteCard({ item }) {
                     {item.content}
                 </div>
                 <div className="button-group">
-                    <Link to="/editnotes"><button onClick={() => handleEditTask(item.id)} type="button" className="btn btn-primary edit-btn">Edit</button></Link>
-                    <button onClick={() => handleRemoveNote(item.id)} type="button" className="btn btn-danger remove-btn">Remove</button>
+                    <Link to="/editnotes"><button onClick={() => handleEditTask(item.id)} type="button" className="edit-btn"><BsPencilSquare /></button></Link>
+                    <button onClick={() => handleRemoveNote(item.id)} type="button" className="remove-btn"><BsFillTrashFill /></button>
                 </div>
             </div>
-
         </div>
     )
 }

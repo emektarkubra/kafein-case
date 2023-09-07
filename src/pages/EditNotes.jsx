@@ -4,7 +4,7 @@ import Alert from "../components/Alert"
 import { SiteContext } from "../context/SiteContext"
 
 export default function EditNotes() {
-    const { editedNote, setEditedNote, setImageUrl, imageUrl, noteList, navigate, note, imgSize, setImgSize } = useContext(SiteContext)
+    const { showAlert, setShowAlert, editedNote, setEditedNote, setImageUrl, imageUrl, noteList, navigate, note, imgSize, setImgSize } = useContext(SiteContext)
 
     useEffect(() => {
         setEditedNote(prev => {
@@ -25,12 +25,20 @@ export default function EditNotes() {
         })
     }
 
-    function handleImageRead(e) {
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+    });
+
+    async function handleImageRead(e) {
         if (e.target.files[0].size >= 3000) {
             setImageUrl()
 
         } else {
-            setImageUrl(URL.createObjectURL(e.target.files[0]));
+            const base64File = await toBase64(e.target.files[0])
+            setImageUrl(base64File);
             setEditedNote(prev => {
                 return {
                     ...prev,
@@ -58,7 +66,12 @@ export default function EditNotes() {
             const storedOnlineUser = JSON.parse(localStorage.getItem("onlineUser"))
             storedOnlineUser.notes = noteList
             localStorage.setItem("onlineUser", JSON.stringify(storedOnlineUser))
-            navigate("/mylist")
+
+            // for success alert
+            setShowAlert(true)
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 1000);
         }
     }
 
@@ -68,6 +81,9 @@ export default function EditNotes() {
             <div className="col-5" >
                 {
                     imgSize ? <Alert alert="danger" content="Couldn't added.. image size too big" /> : ""
+                }
+                {
+                    showAlert ? <Alert alert="success" content="Updated note" /> : ""
                 }
                 <form onSubmit={handleSubmitEditedNote}>
                     <div className="form-group mb-3">

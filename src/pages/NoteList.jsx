@@ -10,7 +10,7 @@ export default function NoteList() {
     const [displayedNotes, setDisplayedNotes] = useState([])
 
     useEffect(() => {
-        const slicedNoteList = noteList.slice(0, count)
+        const slicedNoteList = noteList?.slice(0, count)
         setDisplayedNotes(slicedNoteList)
     }, [noteList, count])
 
@@ -57,19 +57,17 @@ export default function NoteList() {
                 </div>
 
                 {
-                    noteList.length === 0 ? <div className="form-group p-4 text-center"><h3>Couldn't found notes</h3></div> : (<>
-                    <div className="form-group mb-3">
-                    {
-                        displayedNotes?.map(item => <NoteCard key={item.id} item={item} />)
-                    }
-                    <div className="form-group mb-3">
-                        <button onClick={handleShowMore} className="btn btn-primary">Show more</button>
-                    </div>
-                </div>
+                    noteList?.length === 0 ? <div className="form-group p-4 text-center"><h3> Couldn't found any notes </h3></div> : (<>
+                        <div className="form-group mb-3">
+                            {
+                                displayedNotes?.map(item => <NoteCard key={item.id} item={item} />)
+                            }
+                            <div className="form-group mb-3">
+                                <button onClick={handleShowMore} className="btn btn-primary">Show more</button>
+                            </div>
+                        </div>
                     </>)
                 }
-
-                
             </div>
         </>
     )
