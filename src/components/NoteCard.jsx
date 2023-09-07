@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { SiteContext } from "../context/SiteContext"
 import LazyLoadImage from "./LazyLoadImage"
 import "./style/noteCard.scss"
+import { BsFillStarFill } from "react-icons/bs";
+
 
 export default function NoteCard({ item }) {
     const { setOpenModal, setIsDelete, setUserId, setEditedNote } = useContext(SiteContext)
@@ -22,8 +24,10 @@ export default function NoteCard({ item }) {
 
     return (
         <div className="card">
-            <div className="card-header">
-                {item.priority}
+            <div className="card-header" >
+                {[...Array(Number(item.priority))].map((item, index) => (
+                    <BsFillStarFill className="star" key={index} />
+                ))}
             </div>
             <div className="card-body">
                 <div className="img-box">

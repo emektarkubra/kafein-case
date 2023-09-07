@@ -26,7 +26,7 @@ export default function NoteList() {
         if (e.target.value === "1") {
             storedOnlineUser.notes.sort((a, b) => a.priority - b.priority)
             setNoteList(storedOnlineUser.notes)
-        } else if (e.target.value === "10") {
+        } else if (e.target.value === "2") {
             storedOnlineUser.notes.sort((a, b) => b.priority - a.priority)
             setNoteList(storedOnlineUser.notes)
         } else {
@@ -44,7 +44,7 @@ export default function NoteList() {
             {
                 openModal && <Modal />
             }
-            <div className="col-6" >
+            <div className="col-7" >
                 <div className="form-group mb-3">
                     <input onChange={handleFilterNotes} type="text" id="disabledTextInput" className="form-control" placeholder="Filter your note" />
                 </div>
@@ -57,11 +57,19 @@ export default function NoteList() {
                 </div>
 
                 {
-                    displayedNotes?.map(item => <NoteCard key={item.id} item={item} />)
-                }
-                <div className="form-group mb-3">
-                    <button onClick={handleShowMore} className="btn btn-primary">Show more</button>
+                    noteList.length === 0 ? <div className="form-group p-4 text-center"><h3>Couldn't found notes</h3></div> : (<>
+                    <div className="form-group mb-3">
+                    {
+                        displayedNotes?.map(item => <NoteCard key={item.id} item={item} />)
+                    }
+                    <div className="form-group mb-3">
+                        <button onClick={handleShowMore} className="btn btn-primary">Show more</button>
+                    </div>
                 </div>
+                    </>)
+                }
+
+                
             </div>
         </>
     )

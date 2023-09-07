@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className="container d-flex justify-content-center p-5" style={{ border: "1px solid red" }}>
+      <div className="container d-flex justify-content-center p-5">
         <SiteRoutes />
       </div>
       <Footer />

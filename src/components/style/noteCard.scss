@@ -1,0 +1,54 @@
+$primary-color: #212529;
+$font-family: Helvetica, sans-serif;
+
+.card {
+    font-family: $font-family;
+    margin-bottom: 2vw;
+
+    &:hover {
+        .button-group {
+            visibility: visible;
+        }
+    }
+}
+
+.card-body {
+    overflow: hidden;
+    overflow-wrap: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.card-content {
+    color: $primary-color;
+    padding: 0 0 0 0.5vw;
+    width: 70%;
+    font-size: 1.2vw;
+    margin-top: 0.2vw;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: nowrap;
+    visibility: hidden;
+}
+
+.remove-btn {
+    width: 70px;
+    min-width: 20px;
+    height: 30px;
+    margin-left: 0.3vw;
+}
+
+.edit-btn {
+    width: 50px;
+    min-width: 10px;
+    height: 30px;
+    margin-left: 0.3vw;
+}
+
+.star {
+    color: red;
+    float : right;
+}

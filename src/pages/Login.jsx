@@ -32,6 +32,8 @@ export default function Login() {
             }, 1000);
         }
 
+        localStorage.removeItem("noteList")
+
     }
 
     return (

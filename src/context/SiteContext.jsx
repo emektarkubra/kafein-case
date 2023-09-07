@@ -46,14 +46,16 @@ export default function SiteContextProvider({ children }) {
     useEffect(() => {
 
         const storedOnlineUser = JSON.parse(localStorage.getItem("onlineUser"))
+        const storedNoteList = JSON.parse(localStorage.getItem("noteList"))
         if (storedOnlineUser?.id) {
             navigate("/mylist")
             setIsValid(true)
         } else {
             navigate("/login")
         }
-        setNoteList(storedOnlineUser?.notes ?? [])
+        setNoteList(storedOnlineUser?.notes ?? storedNoteList)
         setImgSize(false)
+        setShowAlert(false)
     }, [])
 
 
