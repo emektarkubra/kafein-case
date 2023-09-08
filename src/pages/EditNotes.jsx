@@ -33,7 +33,7 @@ export default function EditNotes() {
     });
 
     async function handleImageRead(e) {
-        if (e.target.files[0].size >= 800000) {
+        if (e.target.files[0].size >= 8000) {
             setImageUrl()
 
         } else {

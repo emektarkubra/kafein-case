@@ -49,7 +49,7 @@ export default function NoteList() {
 
             <div className="col-7" >
                 {
-                    showDangerAlert ? <Alert alert="danger" content="Deleted note" /> : ""
+                    showDangerAlert ? <Alert alert="danger" content="Deleted note" className="position-fixed w-25 top-0 end-0" /> : ""
                 }
                 <div className="form-group mb-3">
                     <input onChange={handleFilterNotes} type="text" id="disabledTextInput" className="form-control" placeholder="Filter your note" />
@@ -68,9 +68,14 @@ export default function NoteList() {
                             {
                                 displayedNotes?.map(item => <NoteCard key={item.id} item={item} />)
                             }
-                            <div className="form-group mb-3">
+                            {
+                                displayedNotes?.length !== noteList?.length  ? (<>
+                                 <div className="form-group mb-3">
                                 <button onClick={handleShowMore} className="btn btn-primary">Show more</button>
                             </div>
+                                </>) : <div className="form-group p-4 text-center"><h4>No more notes to display.</h4></div>
+                            }
+                           
                         </div>
                     </>)
                 }

@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { dummyImage } from "../data/dummyImage";
 
-
-
 export default function LazyLoadImage({ src, alt }) {
     const [imageSrc, setImageSrc] = useState();
 

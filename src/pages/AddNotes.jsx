@@ -48,7 +48,7 @@ export default function AddNotes() {
     });
 
     async function handleImageRead(e) {
-        if (e.target.files[0].size >= 800000) {
+        if (e.target.files[0].size >= 8000) {
             setImageUrl()
         } else {
             const base64File = await toBase64(e.target.files[0])

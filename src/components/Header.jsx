@@ -6,8 +6,6 @@ import lightLogo from "../assests/logo-light.svg";
 import { SiteContext } from "../context/SiteContext";
 import "./style/header.scss"
 
-
-
 export default function Header() {
     const { isValid, setIsValid, noteList } = useContext(SiteContext)
     const [storedOnlineUser, setStoredOnlineUser] = useState(null)
@@ -21,7 +19,6 @@ export default function Header() {
         setIsValid(false)
         localStorage.removeItem("onlineUser")
         localStorage.setItem("noteList", JSON.stringify(noteList))
-
     }
 
     return (
@@ -30,8 +27,6 @@ export default function Header() {
                 <div className="container">
                     <div className="d-flex justify-content-between">
                         <div className="logo-box">
-
-
                             {
                                 storedOnlineUser?.id ? (<>
                                     <NavLink to="/mylist" className="d-flex flex-wrap align-items-center mb-2 mb-lg-0 text-white text-decoration-none">

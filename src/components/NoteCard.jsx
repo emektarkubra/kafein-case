@@ -31,8 +31,7 @@ export default function NoteCard({ item }) {
             </div>
             <div className="card-body">
                 <div className="img-box">
-                    {/* <img style={{ width: "30px", height: "30px" }} src={item.image} alt="" /> */}
-                    <LazyLoadImage src={item.image} alt="" />
+                    <LazyLoadImage src={item.image} alt="image not found" />
                 </div>
                 <div className="card-content">
                     {item.content}
